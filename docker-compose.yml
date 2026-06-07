@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: api-credit-management-partners
+    ports:
+      - "8001:8001"
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017/credit_db
+      - SPRING_RABBITMQ_HOST=rabbitmq
+      - SPRING_RABBITMQ_PORT=5672
+      - SPRING_RABBITMQ_USERNAME=guest
+      - SPRING_RABBITMQ_PASSWORD=guest
+      - SPRING_REDIS_HOST=redis
+      - SPRING_REDIS_PORT=6379
+    depends_on:
+      - mongodb
+      - rabbitmq
+      - redis
+
+  mongodb:
+    image: mongo:6.0
+    container_name: credit-mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+      - ./mongo-init/init-db.js:/docker-entrypoint-initdb.d/init-db.js:ro
+
+  rabbitmq:
+    image: rabbitmq:3.11-management
+    container_name: credit-rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - rabbit_data:/var/lib/rabbitmq
+
+  redis:
+    image: redis:7.0-alpine
+    container_name: credit-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+volumes:
+  mongo_data:
+  rabbit_data:
+  redis_data:
