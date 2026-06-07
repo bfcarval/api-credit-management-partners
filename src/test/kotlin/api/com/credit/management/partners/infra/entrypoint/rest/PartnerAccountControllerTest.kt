@@ -11,7 +11,6 @@ import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Test
-import org.springframework.data.mongodb.core.MongoTemplate
 import org.springframework.http.HttpStatus
 
 class PartnerAccountControllerTest {

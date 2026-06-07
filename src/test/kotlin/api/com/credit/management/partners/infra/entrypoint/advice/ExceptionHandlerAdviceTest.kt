@@ -5,7 +5,6 @@ import api.com.credit.management.partners.domain.exception.InsufficientBalanceEx
 import api.com.credit.management.partners.domain.exception.MessagingOperationException
 import api.com.credit.management.partners.domain.exception.PartnerAccountAlreadyExistsException
 import api.com.credit.management.partners.domain.exception.PartnerAccountNotFoundException
-import api.com.credit.management.partners.infra.entrypoint.advice.ExceptionHandlerAdvice
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Test

@@ -1,10 +1,8 @@
 package api.com.credit.management.partners.infra.db.mongo.adapter
 
 import api.com.credit.management.partners.application.port.input.IdempotencyRepositoryPort
-import api.com.credit.management.partners.domain.exception.DatabaseOperationException
 import api.com.credit.management.partners.infra.db.mongo.document.IdempotencyKeyDocument
 import org.slf4j.LoggerFactory
-import org.springframework.dao.DataAccessException
 import org.springframework.dao.DuplicateKeyException
 import org.springframework.data.mongodb.core.MongoTemplate
 import org.springframework.stereotype.Component

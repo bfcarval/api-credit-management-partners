@@ -1,17 +1,15 @@
 package api.com.credit.management.partners.infra.db.mongo.adapter
 
-import api.com.credit.management.partners.domain.exception.DatabaseOperationException
 import api.com.credit.management.partners.infra.db.mongo.document.IdempotencyKeyDocument
 import io.mockk.every
+import io.mockk.junit5.MockKExtension
 import io.mockk.mockk
 import io.mockk.verify
-import io.mockk.junit5.MockKExtension
 import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.api.extension.ExtendWith
-import org.springframework.dao.DataAccessException
 import org.springframework.dao.DuplicateKeyException
 import org.springframework.data.mongodb.core.MongoTemplate
 
@@ -27,7 +25,7 @@ class IdempotencyRepositoryAdapterTest {
     @Test
     fun `deve registrar chave de idempotencia com sucesso`() {
         val document = IdempotencyKeyDocument(key = key, endpointPath = endpointPath)
-        
+
         every { mongoTemplate.insert(any<IdempotencyKeyDocument>()) } returns document
 
         val result = adapter.tryRegisterKey(key, endpointPath)

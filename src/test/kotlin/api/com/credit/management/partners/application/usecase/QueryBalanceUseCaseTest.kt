@@ -4,11 +4,10 @@ import api.com.credit.management.partners.application.port.output.CreditAccountR
 import api.com.credit.management.partners.domain.exception.DatabaseOperationException
 import api.com.credit.management.partners.domain.exception.PartnerAccountNotFoundException
 import api.com.credit.management.partners.domain.model.CreditAccountModel
-import api.com.credit.management.partners.domain.model.vo.MoneyVO
 import io.mockk.every
+import io.mockk.junit5.MockKExtension
 import io.mockk.mockk
 import io.mockk.verify
-import io.mockk.junit5.MockKExtension
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Test
