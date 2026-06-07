@@ -32,12 +32,8 @@ class IdempotencyRepositoryAdapter(
                     log.warn("Conflito de idempotencia detectado. A chave ja existe no banco de dados.")
                     false
                 }
-                is DataAccessException -> {
-                    log.error("Erro critico de banco ao tentar validar chave de idempotencia", ex)
-                    throw DatabaseOperationException("Falha operacional do sistema de idempotencia no banco de dados", ex)
-                }
                 else -> {
-                    log.error("Erro inesperado no adaptador de idempotencia", ex)
+                    log.error("Erro inesperado no no banco de dados.", ex)
                     throw ex
                 }
             }

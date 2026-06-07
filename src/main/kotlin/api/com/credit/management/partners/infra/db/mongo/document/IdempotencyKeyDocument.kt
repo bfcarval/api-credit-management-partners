@@ -9,5 +9,5 @@ import java.time.LocalDateTime
 data class IdempotencyKeyDocument(
     @Id val key: String,
     val endpointPath: String,
-    @Indexed(expireAfterSeconds = 86400) val createdAt: LocalDateTime = LocalDateTime.now()
+    @Indexed(expireAfter = "10s") val createdAt: LocalDateTime = LocalDateTime.now()
 )

@@ -9,7 +9,7 @@ import api.com.credit.management.partners.domain.model.CreditAccountModel
 import api.com.credit.management.partners.infra.db.mongo.repository.CreditAccountMongoRepository
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
-import java.util.*
+import java.util.Optional
 
 @Component
 class CreditAccountRepositoryAdapter(

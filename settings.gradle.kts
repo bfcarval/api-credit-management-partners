@@ -1,1 +1,1 @@
-rootProject.name = "credit-management-partners-api"
+rootProject.name = "api-credit-management-partners"

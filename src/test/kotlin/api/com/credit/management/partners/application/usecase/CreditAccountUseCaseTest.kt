@@ -10,16 +10,18 @@ import api.com.credit.management.partners.domain.model.enums.TransactionStatusTy
 import api.com.credit.management.partners.domain.model.enums.TransactionType
 import api.com.credit.management.partners.infra.db.mongo.document.TransactionDocument
 import io.mockk.every
+import io.mockk.junit5.MockKExtension
 import io.mockk.mockk
 import io.mockk.verify
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.boot.test.context.SpringBootTest
 import java.math.BigDecimal
 import java.time.LocalDateTime
 
-@SpringBootTest
+@ExtendWith(MockKExtension::class)
 class CreditAccountUseCaseTest {
 
     private val accountRepository = mockk<CreditAccountRepositoryPort>(relaxed = true)
@@ -54,7 +56,7 @@ class CreditAccountUseCaseTest {
         val result = useCase.addCredits(partnerId, amount, description)
 
         Assertions.assertNotNull(result)
-        Assertions.assertEquals(TransactionStatusType.COMPLETED.name, result.status)
+        Assertions.assertEquals(TransactionStatusType.COMPLETED, result.status)
         Assertions.assertEquals(amount, result.amount)
 
         verify(exactly = 1) { accountRepository.save(any()) }
@@ -111,7 +113,7 @@ class CreditAccountUseCaseTest {
         val result = useCase.debitCredits(partnerId, amount, description)
 
         Assertions.assertNotNull(result)
-        Assertions.assertEquals(TransactionStatusType.COMPLETED.name, result.status)
+        Assertions.assertEquals(TransactionStatusType.COMPLETED, result.status)
 
         verify(exactly = 1) { accountRepository.save(any()) }
         verify(exactly = 1) { notificationPort.sendTransactionNotification(any()) }
