@@ -22,7 +22,7 @@ db.getCollection('partner_transactions').insertMany([
         "amount": NumberDecimal("1500.00"),
         "description": "Carga inicial de créditos - Ativação via script init",
         "status": "COMPLETED",
-        "createdAt": new Date(new Date() - 24*60*60*1000), // Ontem
+        "createdAt": new Date(new Date() - 24*60*60*1000),
         "completedAt": new Date(new Date() - 24*60*60*1000)
     },
     {
@@ -31,7 +31,7 @@ db.getCollection('partner_transactions').insertMany([
         "amount": NumberDecimal("100.00"),
         "description": "Aporte inicial via script init",
         "status": "COMPLETED",
-        "createdAt": new Date(new Date() - 5*60*60*1000), // 5 horas atrás
+        "createdAt": new Date(new Date() - 5*60*60*1000),
         "completedAt": new Date(new Date() - 5*60*60*1000)
     },
     {
@@ -40,7 +40,7 @@ db.getCollection('partner_transactions').insertMany([
         "amount": NumberDecimal("50.00"),
         "description": "Consumo de API de CEP",
         "status": "COMPLETED",
-        "createdAt": new Date(new Date() - 2*60*60*1000), // 2 horas atrás
+        "createdAt": new Date(new Date() - 2*60*60*1000),
         "completedAt": new Date(new Date() - 2*60*60*1000)
     }
 ]);

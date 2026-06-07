@@ -7,17 +7,20 @@ services:
     ports:
       - "8001:8001"
     environment:
-      - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017/credit_db
+      - SPRING_MONGODB_URI=mongodb://mongodb:27017/credit_db
       - SPRING_RABBITMQ_HOST=rabbitmq
       - SPRING_RABBITMQ_PORT=5672
       - SPRING_RABBITMQ_USERNAME=guest
       - SPRING_RABBITMQ_PASSWORD=guest
-      - SPRING_REDIS_HOST=redis
-      - SPRING_REDIS_PORT=6379
+      - SPRING_DATA_REDIS_HOST=redis
+      - SPRING_DATA_REDIS_PORT=6379
     depends_on:
-      - mongodb
-      - rabbitmq
-      - redis
+      mongodb:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
 
   mongodb:
     image: mongo:6.0
@@ -27,6 +30,11 @@ services:
     volumes:
       - mongo_data:/data/db
       - ./mongo-init/init-db.js:/docker-entrypoint-initdb.d/init-db.js:ro
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/quiet
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   rabbitmq:
     image: rabbitmq:3.11-management
@@ -36,6 +44,11 @@ services:
       - "15672:15672"
     volumes:
       - rabbit_data:/var/lib/rabbitmq
+    healthcheck:
+      test: rabbitmq-diagnostics -q check_running && rabbitmq-diagnostics -q check_local_alarms
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   redis:
     image: redis:7.0-alpine
@@ -44,6 +57,11 @@ services:
       - "6379:6379"
     volumes:
       - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
 
 volumes:
   mongo_data:
