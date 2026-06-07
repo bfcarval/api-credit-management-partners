@@ -37,6 +37,7 @@ docker-compose up -d
 - **Verificar Logs da API:** `docker compose logs -f app`
 - **Verificar Logs do Banco:** `docker compose logs -f mongodb`
 - **Derrubar os Serviços e Volumes:** `docker compose down -v`
+- **Executar testes:** `./gradlew test`
 
 ---
 
