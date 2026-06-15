@@ -6,6 +6,7 @@ import api.com.credit.management.partners.domain.exception.PartnerAccountNotFoun
 import api.com.credit.management.partners.infra.db.mongo.document.TransactionDocument
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
 class TransactionUseCase(
@@ -13,6 +14,7 @@ class TransactionUseCase(
 ) {
     private val log = LoggerFactory.getLogger(javaClass)
 
+    @Transactional
     fun getTransactionHistory(partnerId: String): List<TransactionDocument> {
         log.info("Iniciando consulta de historico de transacoes para o parceiro: {}", partnerId)
 

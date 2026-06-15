@@ -7,6 +7,7 @@ import api.com.credit.management.partners.domain.model.enums.TransactionStatusTy
 import api.com.credit.management.partners.domain.model.event.TransactionNotificationEvent
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDateTime
 
 @Service
@@ -16,6 +17,7 @@ class ReconcilePendingTransactionsUseCase(
 ) {
     private val log = LoggerFactory.getLogger(javaClass)
 
+    @Transactional
     fun execute() {
         val thresholdTime = LocalDateTime.now().minusMinutes(5)
         log.info("Buscando transacoes travadas em PENDING criadas antes de: {}", thresholdTime)

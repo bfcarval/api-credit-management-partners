@@ -8,6 +8,7 @@ import api.com.credit.management.partners.domain.model.CreditAccountModel
 import org.slf4j.LoggerFactory
 import org.springframework.cache.annotation.CacheEvict
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import java.math.BigDecimal
 
 @Service
@@ -16,6 +17,7 @@ class PartnerAccountUseCase(
 ) {
     private val log = LoggerFactory.getLogger(javaClass)
 
+    @Transactional
     fun createAccountPartner(partnerId: String): CreditAccountModel =
         try {
             log.info("Iniciando processo de cadastro de conta por parceiro: {}", partnerId)
@@ -48,6 +50,7 @@ class PartnerAccountUseCase(
         }
 
     @CacheEvict(value = ["getBalance"], key = "#partnerId")
+    @Transactional
     fun deleteAccountPartner(partnerId: String) =
         try {
             log.info("Iniciando processo de exclusao para o parceiro: {}", partnerId)

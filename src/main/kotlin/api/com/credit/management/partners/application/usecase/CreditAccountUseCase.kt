@@ -17,6 +17,7 @@ import org.springframework.cache.annotation.CacheEvict
 import org.springframework.dao.OptimisticLockingFailureException
 import org.springframework.resilience.annotation.Retryable
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import java.math.BigDecimal
 import java.time.LocalDateTime
 
@@ -35,6 +36,7 @@ class CreditAccountUseCase(
         multiplier = 2.0
     )
     @CacheEvict(value = ["getBalance"], key = "#partnerId")
+    @Transactional
     fun addCredits(partnerId: String, amount: BigDecimal, description: String): TransactionVO {
         log.info("Iniciando adicao de creditos para o parceiro: {}, Valor: {}", partnerId, amount)
 
@@ -95,6 +97,7 @@ class CreditAccountUseCase(
         multiplier = 2.0
     )
     @CacheEvict(value = ["getBalance"], key = "#partnerId")
+    @Transactional
     fun debitCredits(partnerId: String, amount: BigDecimal, description: String): TransactionVO {
         log.info("Iniciando consumo de creditos para o parceiro: {}, Valor: {}", partnerId, amount)
 

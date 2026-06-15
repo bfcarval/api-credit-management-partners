@@ -8,6 +8,7 @@ import api.com.credit.management.partners.domain.exception.DatabaseOperationExce
 import org.slf4j.LoggerFactory
 import org.springframework.cache.annotation.Cacheable
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
 class QueryBalanceUseCase(
@@ -17,6 +18,7 @@ class QueryBalanceUseCase(
     private val log = LoggerFactory.getLogger(javaClass)
 
     @Cacheable(value = ["getBalance"], key = "#partnerId")
+    @Transactional
     fun getBalance(partnerId: String): MoneyVO =
         try {
             log.info("Iniciando consulta de saldo para o parceiro: {}", partnerId)
