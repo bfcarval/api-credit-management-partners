@@ -25,3 +25,13 @@ fun TransactionDocument.toVO() = TransactionVO(
     createdAt = LocalDateTime.now(),
     completedAt = completedAt
 )
+
+fun TransactionDocument.toResponse() = TransactionResponse(
+    id = id ?: "",
+    partnerId = partnerId,
+    transactionType = type.name,
+    amount = amount,
+    description = description,
+    transactionStatusType = status.name,
+    createdAt = createdAt
+)

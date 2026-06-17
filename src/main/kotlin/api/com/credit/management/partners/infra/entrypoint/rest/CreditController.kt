@@ -43,16 +43,6 @@ class CreditController(
 
     override fun getTransactionHistory(partnerId: String): ResponseEntity<List<TransactionResponse>> =
         ResponseEntity.ok(
-            transactionUseCase.getTransactionHistory(partnerId).map { doc ->
-                TransactionResponse(
-                    id = doc.id ?: "",
-                    partnerId = doc.partnerId,
-                    transactionType = doc.type.name,
-                    amount = doc.amount,
-                    description = doc.description,
-                    transactionStatusType = doc.status.name,
-                    createdAt = doc.createdAt
-                )
-            }
+            transactionUseCase.getTransactionHistory(partnerId).map { doc -> doc.toResponse() }
         )
 }
